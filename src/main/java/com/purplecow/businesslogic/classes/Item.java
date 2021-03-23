@@ -35,7 +35,7 @@ public class Item
     public String toString()
     {
         return "Item [ id="
-                + this.id + ", name="
+                + this.id.toString() + ", name="
                 + this.name + " ]";
     }
 

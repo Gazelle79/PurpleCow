@@ -31,6 +31,14 @@ public class Item
         this.name = itemName;
     }
 
+    @Override
+    public String toString()
+    {
+        return "Item [ id="
+                + this.id + ", name="
+                + this.name + " ]";
+    }
+
 
 
 }

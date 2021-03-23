@@ -1,4 +1,4 @@
-package com.purplecow;
+package com.purplecow.businesslogic.controllers;
 
 import com.purplecow.businesslogic.classes.Item;
 
@@ -16,13 +16,14 @@ public class ItemController
     @RequestMapping("/")
     public String index()
     {
-        return "Greetings from Spring Boot!";
+        String hello = "\n\n Greetings from Spring Boot! \n\n";
+        return hello;
     }
 
     /*
     Get all the items in the list.
     */
-    @RequestMapping("/item")
+    //@RequestMapping("/item")
     public ArrayList<Item> getItems()
     {
         return theseItems;
@@ -31,7 +32,7 @@ public class ItemController
     /*
     Set "ItemsToSet" to an internal list of items.
     */
-    @RequestMapping("/item")
+    //@RequestMapping("/item")
     public void setItems(ArrayList<Item> itemsToSet)
     {
         this.theseItems = itemsToSet;
@@ -40,7 +41,7 @@ public class ItemController
     /*
     Clear the internal set of items.
     */
-    @RequestMapping("/item")
+    //@RequestMapping("/item")
     public void deleteItems()
     {
         this.theseItems.clear();
@@ -50,7 +51,7 @@ public class ItemController
     /*
     Return an item with this ID.
     */
-    @RequestMapping("/item")
+    //@RequestMapping("/item")
     public Item getItem(UUID itemId)
     {
         Item itemToReturn = null;
@@ -68,7 +69,7 @@ public class ItemController
     /*
     Update an item with this id. Return true if found & updated. Otherwise, false.
      */
-    @RequestMapping("/item")
+    //@RequestMapping("/item")
     public boolean updateItem(UUID itemId, String newItemName)
     {
         boolean wasItemUpdated = false;
@@ -87,7 +88,7 @@ public class ItemController
     /*
     Delete an item with this id. Return true if found & deleted. Otherwise, false.
     */
-    @RequestMapping("/item")
+    //@RequestMapping("/item")
     public boolean deleteItem(UUID itemId)
     {
         boolean wasItemDeleted = false;

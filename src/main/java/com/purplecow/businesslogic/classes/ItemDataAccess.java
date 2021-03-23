@@ -39,38 +39,26 @@ public class ItemDataAccess
     /*
     Add the item to the list.
     */
-    public boolean addItems(ArrayList<Item> itemsToAdd)
+    public void addItems(ArrayList<Item> itemsToAdd)
     {
-        boolean wereItemsAdded = false;
         for(Item itemToAdd : itemsToAdd)
         {
             if(itemToAdd != null)
             {
                 this.itemList.add(itemToAdd);
-                wereItemsAdded = true;
-            }
-            else
-            {
-                wereItemsAdded = false;
-                break;
             }
         }
-
-        return wereItemsAdded;
     }
 
     /*
     Add the item to the list.
     */
-    public boolean addItem(Item itemToAdd)
+    public void addItem(Item itemToAdd)
     {
-        boolean wasItemAdded = false;
         if(itemToAdd != null)
         {
             this.itemList.add(itemToAdd);
-            wasItemAdded = true;
         }
-        return wasItemAdded;
     }
 
 
@@ -92,29 +80,24 @@ public class ItemDataAccess
     }
 
     /*
-    Update an item. Return true if found & updated. Otherwise, false.
+    Update an item.
      */
-    public boolean updateItem(Item updatedItem)
+    public void updateItem(Item updatedItem)
     {
-        boolean wasItemUpdated = false;
         for(Item thisItem : itemList)
         {
             if(thisItem.getId().equals(updatedItem.getId()))
             {
                 thisItem.setName(updatedItem.getName());
-                wasItemUpdated = true;
             }
-            // wasItemUpdated stays false if item is never found.
         }
-        return wasItemUpdated;
     }
 
     /*
-    Update many items. Return true if found & updated. Otherwise, false.
+    Update many items.
      */
-    public boolean updateItems(ArrayList<Item> updatedItems)
+    public void updateItems(ArrayList<Item> updatedItems)
     {
-        boolean wereItemsUpdated = false;
         for(Item itemToUpdate : itemList)
         {
             for(Item updatedItem: updatedItems)
@@ -124,28 +107,38 @@ public class ItemDataAccess
                     itemToUpdate.setName(updatedItem.getName());
                 }
             }
-            wereItemsUpdated = true;
-            // wereItemsUpdated stays false if item is never found.
         }
-        return wereItemsUpdated;
     }
 
     /*
-    Delete an item with this id. Return true if found & deleted. Otherwise, false.
+    Delete an item with this id.
     */
-    public boolean deleteItem(UUID itemId)
+    public void deleteItem(UUID itemId)
     {
-        boolean wasItemDeleted = false;
         for(Item thisItem : itemList)
         {
             if(thisItem.getId().equals(itemId))
             {
                 itemList.remove(thisItem);
-                wasItemDeleted = true;
             }
-            // wasItemDeleted stays false if item is never found.
         }
-        return wasItemDeleted;
+    }
+
+    /*
+    Update many items.
+    */
+    public void deleteItems(ArrayList<Item> itemsToDelete)
+    {
+        for(Item thisItem : itemList)
+        {
+            for(Item itemToDelete: itemsToDelete)
+            {
+                if (thisItem.getId().equals(itemToDelete.getId()))
+                {
+                    itemList.remove(itemToDelete);
+                }
+            }
+        }
     }
 
 

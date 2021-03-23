@@ -5,7 +5,12 @@ import java.util.UUID;
 
 public class ItemDataAccess
 {
-    private ArrayList<Item> itemList = new ArrayList<Item>();
+    private ArrayList<Item> itemList = null;
+
+    public ItemDataAccess()
+    {
+        this.itemList = new ArrayList<Item>();
+    }
 
     /*
     Get all the items in the list.
@@ -87,21 +92,42 @@ public class ItemDataAccess
     }
 
     /*
-    Update an item with this id. Return true if found & updated. Otherwise, false.
+    Update an item. Return true if found & updated. Otherwise, false.
      */
-    public boolean updateItem(UUID itemId, String newItemName)
+    public boolean updateItem(Item updatedItem)
     {
         boolean wasItemUpdated = false;
         for(Item thisItem : itemList)
         {
-            if(thisItem.getId().equals(itemId))
+            if(thisItem.getId().equals(updatedItem.getId()))
             {
-                thisItem.setName(newItemName);
+                thisItem.setName(updatedItem.getName());
                 wasItemUpdated = true;
             }
             // wasItemUpdated stays false if item is never found.
         }
         return wasItemUpdated;
+    }
+
+    /*
+    Update many items. Return true if found & updated. Otherwise, false.
+     */
+    public boolean updateItems(ArrayList<Item> updatedItems)
+    {
+        boolean wereItemsUpdated = false;
+        for(Item itemToUpdate : itemList)
+        {
+            for(Item updatedItem: updatedItems)
+            {
+                if (itemToUpdate.getId().equals(updatedItem.getId()))
+                {
+                    itemToUpdate.setName(updatedItem.getName());
+                }
+            }
+            wereItemsUpdated = true;
+            // wereItemsUpdated stays false if item is never found.
+        }
+        return wereItemsUpdated;
     }
 
     /*

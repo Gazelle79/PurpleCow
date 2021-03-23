@@ -1,31 +1,18 @@
-package com.purplecow.businesslogic.controllers;
+package com.purplecow.businesslogic.classes;
 
-import com.purplecow.businesslogic.classes.Item;
+import java.util.ArrayList;
+import java.util.UUID;
 
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.*;
-
-
-@RestController
-public class ItemController
+public class ItemDataAccess
 {
-    private ArrayList<Item> theseItems = new ArrayList<Item>();
-
-    @RequestMapping("/")
-    public String index()
-    {
-        String hello = "\n\n Greetings from Spring Boot! \n\n";
-        return hello;
-    }
+    private ArrayList<Item> itemList = new ArrayList<Item>();
 
     /*
     Get all the items in the list.
     */
     public ArrayList<Item> getItems()
     {
-        return theseItems;
+        return this.itemList;
     }
 
     /*
@@ -33,7 +20,7 @@ public class ItemController
     */
     public void setItems(ArrayList<Item> itemsToSet)
     {
-        this.theseItems = itemsToSet;
+        this.itemList = itemsToSet;
     }
 
     /*
@@ -41,7 +28,44 @@ public class ItemController
     */
     public void deleteItems()
     {
-        this.theseItems.clear();
+        this.itemList.clear();
+    }
+
+    /*
+    Add the item to the list.
+    */
+    public boolean addItems(ArrayList<Item> itemsToAdd)
+    {
+        boolean wereItemsAdded = false;
+        for(Item itemToAdd : itemsToAdd)
+        {
+            if(itemToAdd != null)
+            {
+                this.itemList.add(itemToAdd);
+                wereItemsAdded = true;
+            }
+            else
+            {
+                wereItemsAdded = false;
+                break;
+            }
+        }
+
+        return wereItemsAdded;
+    }
+
+    /*
+    Add the item to the list.
+    */
+    public boolean addItem(Item itemToAdd)
+    {
+        boolean wasItemAdded = false;
+        if(itemToAdd != null)
+        {
+            this.itemList.add(itemToAdd);
+            wasItemAdded = true;
+        }
+        return wasItemAdded;
     }
 
 
@@ -51,7 +75,7 @@ public class ItemController
     public Item getItem(UUID itemId)
     {
         Item itemToReturn = null;
-        for(Item thisItem : theseItems)
+        for(Item thisItem : itemList)
         {
             if(thisItem.getId().equals(itemId))
             {
@@ -68,7 +92,7 @@ public class ItemController
     public boolean updateItem(UUID itemId, String newItemName)
     {
         boolean wasItemUpdated = false;
-        for(Item thisItem : theseItems)
+        for(Item thisItem : itemList)
         {
             if(thisItem.getId().equals(itemId))
             {
@@ -86,11 +110,11 @@ public class ItemController
     public boolean deleteItem(UUID itemId)
     {
         boolean wasItemDeleted = false;
-        for(Item thisItem : theseItems)
+        for(Item thisItem : itemList)
         {
             if(thisItem.getId().equals(itemId))
             {
-                theseItems.remove(thisItem);
+                itemList.remove(thisItem);
                 wasItemDeleted = true;
             }
             // wasItemDeleted stays false if item is never found.

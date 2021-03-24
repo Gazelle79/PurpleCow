@@ -2,14 +2,22 @@ package com.purplecow.businesslogic.classes;
 
 import java.util.ArrayList;
 import java.util.UUID;
+//import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
+//@Repository
+@Service
 public class ItemDataAccess
 {
     private ArrayList<Item> itemList = null;
 
+    /*
+    * Constructor.
+    * */
     public ItemDataAccess()
     {
         this.itemList = new ArrayList<Item>();
+        this.createItems();
     }
 
     /*
@@ -141,5 +149,23 @@ public class ItemDataAccess
         }
     }
 
+
+    private void createItems()
+    {
+        Item itemA = new Item("Frederick");
+        Item itemB = new Item("Robert");
+        Item itemC = new Item("Matthew");
+        Item itemD = new Item("Shakirah");
+        Item itemE = new Item("Claudia");
+        Item itemF = new Item("Stephanie");
+
+        this.itemList.add(itemA);
+        this.itemList.add(itemB);
+        this.itemList.add(itemC);
+        this.itemList.add(itemD);
+        this.itemList.add(itemE);
+        this.itemList.add(itemF);
+
+    }
 
 }

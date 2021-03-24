@@ -6,13 +6,8 @@ import com.purplecow.businesslogic.classes.ItemDataAccess;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.*;
 
@@ -22,16 +17,17 @@ import java.util.*;
 * */
 
 @RestController
-@RequestMapping(path = "/item")
+//@RequestMapping(path = "/item")
 public class ItemController
 {
+    @Autowired
     private ItemDataAccess dataAccess = new ItemDataAccess();
-
 
     /*
     Get all the items in the list.
     */
-    @GetMapping(path = "/", produces = "application/json")
+    //@GetMapping(path = "/", produces = "application/json")
+    @RequestMapping(method=RequestMethod.GET, value = "/item", produces = "application/json")
     public ArrayList<Item> getItems()
     {
         return this.dataAccess.getItems();
@@ -55,15 +51,25 @@ public class ItemController
 
 
     /*
+    Add an Item
+    */
+    @RequestMapping(method=RequestMethod.POST, value = "/item", produces = "application/json")
+    public void addItem(@RequestBody Item itemToAdd)
+    {
+        this.dataAccess.addItem(itemToAdd);
+    }
+
+    /*
     Return an item with this ID.
     */
-    public Item getItem(UUID itemId)
+    @RequestMapping(method=RequestMethod.GET, path = "/item/{id}", produces = "application/json")
+    public Item getItem(@PathVariable UUID id)
     {
         Item itemToReturn = null;
         ArrayList<Item> availableItems = this.dataAccess.getItems();
         for(Item thisItem : availableItems)
         {
-            if(thisItem.getId().equals(itemId))
+            if(thisItem.getId().equals(id))
             {
                 itemToReturn = thisItem;
             }

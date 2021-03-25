@@ -60,11 +60,13 @@ public class ItemController
     /*
     Update many items.
      */
+    /*
     @RequestMapping(method=RequestMethod.PUT, value = "/item", produces = "application/json")
     public void updateItems(@RequestBody ArrayList<Item> updatedItems)
     {
         this.dataAccess.updateItems(updatedItems);
     }
+    */
 
     /*
     Delete an item with this id.
@@ -78,11 +80,13 @@ public class ItemController
     /*
     Delete all items in the specified list.
     */
+    /*
     @RequestMapping(method=RequestMethod.DELETE, value = "/item/{id}")
     public void deleteItems(ArrayList<Item> itemsToDelete)
     {
         this.dataAccess.deleteItems(itemsToDelete);
     }
+    */
 
     /*
     Clear the internal set of items.
@@ -106,18 +110,14 @@ public class ItemController
     /*
     Add many Items.
     */
+    /*
     @RequestMapping(method=RequestMethod.POST, value = "/item", produces = "application/json")
     public void addItems(@RequestBody ArrayList<Item> itemsToAdd)
     {
         this.dataAccess.addItems(itemsToAdd);
     }
 
-
-
-
-
-
-
+    */
 
 
 }

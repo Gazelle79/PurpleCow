@@ -1,12 +1,10 @@
 package com.purplecow.businesslogic.controllers;
 
 import com.purplecow.businesslogic.classes.Item;
-import com.purplecow.businesslogic.classes.ItemCollection;
 import com.purplecow.businesslogic.classes.ItemDataAccess;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.*;
 

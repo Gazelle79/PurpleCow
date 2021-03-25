@@ -92,11 +92,11 @@ public class ItemDataAccess
      */
     public void updateItem(Item updatedItem)
     {
-        for(Item thisItem : itemList)
+        for(Item itemToUpdate : this.itemList)
         {
-            if(thisItem.getId().equals(updatedItem.getId()))
+            if(itemToUpdate.getId().equals(updatedItem.getId()))
             {
-                thisItem.setName(updatedItem.getName());
+                this.itemList.set(this.itemList.indexOf(itemToUpdate), updatedItem);
             }
         }
     }
@@ -106,13 +106,13 @@ public class ItemDataAccess
      */
     public void updateItems(ArrayList<Item> updatedItems)
     {
-        for(Item itemToUpdate : itemList)
+        for(Item itemToUpdate : this.itemList)
         {
             for(Item updatedItem: updatedItems)
             {
                 if (itemToUpdate.getId().equals(updatedItem.getId()))
                 {
-                    itemToUpdate.setName(updatedItem.getName());
+                    this.itemList.set(this.itemList.indexOf(itemToUpdate), updatedItem);
                 }
             }
         }

@@ -14,7 +14,6 @@ import java.util.*;
 * */
 
 @RestController
-//@RequestMapping(path = "/item")
 public class ItemController
 {
     @Autowired
@@ -23,7 +22,6 @@ public class ItemController
     /*
     Get all the items in the list.
     */
-    //@GetMapping(path = "/", produces = "application/json")
     @RequestMapping(method=RequestMethod.GET, value = "/item", produces = "application/json")
     public ArrayList<Item> getItems()
     {
@@ -57,16 +55,6 @@ public class ItemController
         this.dataAccess.updateItem(updatedItem);
     }
 
-    /*
-    Update many items.
-     */
-    /*
-    @RequestMapping(method=RequestMethod.PUT, value = "/item", produces = "application/json")
-    public void updateItems(@RequestBody ArrayList<Item> updatedItems)
-    {
-        this.dataAccess.updateItems(updatedItems);
-    }
-    */
 
     /*
     Delete an item with this id.
@@ -77,16 +65,6 @@ public class ItemController
         this.dataAccess.deleteItem(id);
     }
 
-    /*
-    Delete all items in the specified list.
-    */
-    /*
-    @RequestMapping(method=RequestMethod.DELETE, value = "/item/{id}")
-    public void deleteItems(ArrayList<Item> itemsToDelete)
-    {
-        this.dataAccess.deleteItems(itemsToDelete);
-    }
-    */
 
     /*
     Clear the internal set of items.
@@ -107,17 +85,6 @@ public class ItemController
         this.dataAccess.addItem(itemToAdd);
     }
 
-    /*
-    Add many Items.
-    */
-    /*
-    @RequestMapping(method=RequestMethod.POST, value = "/item", produces = "application/json")
-    public void addItems(@RequestBody ArrayList<Item> itemsToAdd)
-    {
-        this.dataAccess.addItems(itemsToAdd);
-    }
-
-    */
 
 
 }

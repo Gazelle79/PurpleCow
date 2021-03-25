@@ -78,6 +78,15 @@ public class ItemController
     }
 
     /*
+    Delete all items in the specified list.
+    */
+    @RequestMapping(method=RequestMethod.DELETE, value = "/item/{id}")
+    public void deleteItems(ArrayList<Item> itemsToDelete)
+    {
+        this.dataAccess.deleteItems(itemsToDelete);
+    }
+
+    /*
     Clear the internal set of items.
     */
     @RequestMapping(method=RequestMethod.DELETE, value = "/item", produces = "application/json")

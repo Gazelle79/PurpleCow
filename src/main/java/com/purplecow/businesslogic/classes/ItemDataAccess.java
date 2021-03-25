@@ -37,14 +37,6 @@ public class ItemDataAccess
     }
 
     /*
-    Clear the internal set of items.
-    */
-    public void deleteItems()
-    {
-        this.itemList.clear();
-    }
-
-    /*
     Add the item to the list.
     */
     public void addItems(ArrayList<Item> itemsToAdd)
@@ -149,6 +141,13 @@ public class ItemDataAccess
         }
     }
 
+    /*
+Clear the internal set of items.
+*/
+    public void deleteItems()
+    {
+        this.itemList.clear();
+    }
 
     private void createItems()
     {

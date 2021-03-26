@@ -3,9 +3,8 @@
 
 SUMMARY
 -------
-**A java web application API that counts items.
-
-**Purple Cow doesn't have a GUI. It can be tested using a plugin like PostMan. It can also be tested from a web browser.**
+Purple Cow is a java web API. It doesn't have a user interface. It can be tested using a plugin like PostMan. 
+It can also be tested from a web browser.**
  
 
 REQUIREMENTS
@@ -44,7 +43,7 @@ From Docker:
 
 ### EXECUTING Purple Cow:
 
- - ``sudo docker run -p 3000:3000 purplecow ``
+  - ``sudo docker run -p 3000:3000 purplecow ``
 
 
 _This starts the Spring service._ Once activated, type the following into your browser:
@@ -91,15 +90,20 @@ You can change that data. Those REST methods use HTTP GET, PUT, DELETE and POST 
 
 These methods were affected:
 
-    ```java 
+    ``` 
     public void addItems(ArrayList<Item> itemsToAdd) { ... }
+    ```
     
+    ```
     public void updateItems(ArrayList<Item> updatedItems) { ... }
+    ```
 
+    ```
     public void deleteItems(ArrayList<Item> itemsToDelete) { ... }
+    ```
 
+    ```
     public void addItems(ArrayList<Item> itemsToAdd) { ... }   
-
     ```
 
 ### FUTURE CHANGES:

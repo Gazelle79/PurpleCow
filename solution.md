@@ -90,15 +90,20 @@ You can change that data. Those REST methods use HTTP GET, PUT, DELETE and POST 
 
 These methods were affected:
 
-    ```java 
+    ``` 
     public void addItems(ArrayList<Item> itemsToAdd) { ... }
+    ```
     
+    ```
     public void updateItems(ArrayList<Item> updatedItems) { ... }
+    ```
 
+    ```
     public void deleteItems(ArrayList<Item> itemsToDelete) { ... }
+    ```
 
+    ```
     public void addItems(ArrayList<Item> itemsToAdd) { ... }   
-
     ```
 
 ### FUTURE CHANGES:

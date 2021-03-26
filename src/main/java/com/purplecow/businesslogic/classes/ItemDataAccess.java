@@ -2,10 +2,8 @@ package com.purplecow.businesslogic.classes;
 
 import java.util.ArrayList;
 import java.util.UUID;
-//import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
-//@Repository
 @Service
 public class ItemDataAccess
 {
@@ -142,8 +140,8 @@ public class ItemDataAccess
     }
 
     /*
-Clear the internal set of items.
-*/
+    Clear the internal set of items.
+    */
     public void deleteItems()
     {
         this.itemList.clear();

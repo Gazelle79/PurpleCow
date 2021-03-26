@@ -5,8 +5,7 @@ lib
 .settings
 target
 .git
-.mvn/timing.properties
-.mvn/wrapper/maven-wrapper.jar
+.mvn/*
 *.iws
 *.iml
 *.ipr

@@ -3,8 +3,7 @@
 
 SUMMARY
 -------
-Purple Cow is a java web API. It doesn't have a user interface. It can be tested using a plugin like PostMan. 
-It can also be tested from a web browser.**
+Purple Cow is a java web API. __It doesn't have a user interface.__ 
  
 
 REQUIREMENTS
@@ -23,94 +22,109 @@ TO START
  - Compile the application.
  - Execute the application.
 
-You can compile and execute Purple cow from an IDE.
-You could also simply run Purple Cow from Docker.
+It's possible to compile and execute Purple Cow from Maven, as well as Docker.
 
-It's best to run Purple Cow from Docker, with a single command.
+__The best way to run Purple Cow is from the script specifically to do so:__  
 
+    - `` PurpleCow.sh ``
+
+
+
+### Maven / IDE compilation commands:
 From a command prompt:
 
-### COMPILING Purple Cow:
- - `` mvn compile ``
+##### COMPILING Purple Cow:
+    - `` mvn clean package ``
+
+##### EXECUTING Purple Cow:
+    - ``./mvnw spring-boot:run ``
 
 
-### EXECUTING Purple Cow:
+### Docker compilation commands:
 
- - ``./mvnw spring-boot:run ``
+##### COMPILING Purple Cow:
+    - ``sudo docker build -t purplecow .``
+
+##### EXECUTING Purple Cow:
+     - ``sudo docker run -p 3000:3000 purplecow ``
+
+## RECOMMENDED WAY TO RUN PURPLE COW:
+It's best to run Purple Cow from the following file:
+
+    - ``[Purple Cow directory] / PurpleCow.sh``
+
+In the Purple Cow home directory, run the following command:
+
+    - ``./PurpleCow.sh ``
+
+To serve the application on port 5000, run this command:
+
+    - ``./PurpleCow.sh 5000``
+
+__This starts the Spring service. It runs in the background, so it doesn't hijack your terminal.__ \
+Because of that, you must stop the running Docker instance manually.
+
+## CONFIGURING PURPLE COW:
+
+Once activated, type the following into your browser:
+
+    - ``localhost:3000/item``
+
+In addition to having a port # as an argument, you can configure the default port Purple Cow is served on. Open this file:
+
+    - ``PurpleCow/src/main/resources/application.properties``
+
+To serve the application on port 4050, enter the following:
 
 
-From Docker:
-
-### EXECUTING Purple Cow:
-
-  - ``sudo docker run -p 3000:3000 purplecow ``
+    - ``server.port = 4050``
 
 
-_This starts the Spring service._ Once activated, type the following into your browser:
-
- - ``localhost:3000/item``
-
-You can configure the port Purple Cow is served on. Open this file:
-
- - ``PurpleCow/src/main/resources/application.properties``
-
-To serve the application on port 4050 (or any other port), enter the following:
-
- - ``server.port = 4050``
-
-You can also configure the port directly from Dockerfile. Open this file:
-
- - ``PurpleCow/Dockerfile``
-
-To serve the application on port 5000 (or any other port), enter this line in Dockerfile:
-
- - ``EXPOSE 5000``
 
 
-### TESTING Purple Cow:
+## TESTING Purple Cow:
 
-#### with PostMan:
+#### Purple Cow can be tested using a plugin like PostMan. It can also be tested from a web browser.
+
+#### From PostMan:
  - _With the Spring service running,_ use the PostMan plugin to test the API. Dummy data is already included in a method. You can manipulate that data with HTTP GET, POST, DELETE, and PUT commands. You'll see where the HTTP REST methods talk to a Data access object containing item data. 
 
 You can change that data. Those REST methods use HTTP GET, PUT, DELETE and POST to change the data in the Data access object. The changes you see there will be reflected in a web application.   
 
-#### with a web browser:
- - _With the Spring service running,_ type the appropriate URL for the data you want to see.  
+#### From a web browser:
+ - __With the Spring service running,__ type the appropriate URL for the data you want to see.  
 
-    Example: To see an item with id #5, type this into your browser:
-
-    ```localhost:3000/item/5``` 
+    __Example:__ To see an item with id #5, type this into your browser:
 
 
-### IMPLEMENTATION DETAILS:
+    - ``localhost:3000/item/5`` 
 
- - _No unit tests were included._ I could only test the methods in tha Data access object, which only added and removed items. I left them out. Rest COntroller methods were tested seperately, with a web browser.
 
- - _Data access methods to update a List of items couldn't be called properly by any REST method calls._ They would cause errors with their requisite HTTP commands. HTTP PUT can update a single item by ID, but updating an ArrayList of items would cause errors due to its' identical HTTP command structure. _These can be fixed in the future._ 
+## IMPLEMENTATION NOTES / DETAILS:
+
+ - __No unit tests were included.__ I could only test the methods in tha Data access object, which only added and removed items. Because of that, they were left them out. Rest Controller methods were tested seperately, with a web browser.
+
+
+ - __Data access methods to update a List of items couldn't be called properly by any REST method calls.__ They would cause errors with their requisite HTTP commands. HTTP PUT can update a single item by ID, but updating an ArrayList of items would cause errors due to its' identical HTTP command structure.  __These can be fixed in the future.__
+
 
 These methods were affected:
 
-    ``` 
+    ``
     public void addItems(ArrayList<Item> itemsToAdd) { ... }
-    ```
     
-    ```
     public void updateItems(ArrayList<Item> updatedItems) { ... }
-    ```
 
-    ```
     public void deleteItems(ArrayList<Item> itemsToDelete) { ... }
-    ```
 
-    ```
     public void addItems(ArrayList<Item> itemsToAdd) { ... }   
-    ```
+    ``
 
-### FUTURE CHANGES:
+## FUTURE CHANGES:
 
  - Developers can build on this any way they choose. To do so: 
     
-     - Build an apprpriate method in ItemDataAccess.java to store data in the database (or, ArrayList of items)
+     - Build an appropriate method in ItemDataAccess.java to store data in the database (or, ArrayList of items)
      - Build an appropriate REST method in ItemRestController.java
      - Make the REST method in ItemRestCOntroller.java call the appropriate method in ItemDataAccess.java.
 

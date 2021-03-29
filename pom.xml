@@ -14,7 +14,6 @@
 	<artifactId>PurpleCow</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>PurpleCow</name>
-	<packaging>jar</packaging>
 	<description>Starter project for Purple Cow. </description>
 
 	<properties>

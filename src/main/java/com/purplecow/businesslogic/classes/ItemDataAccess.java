@@ -2,6 +2,9 @@ package com.purplecow.businesslogic.classes;
 
 import java.util.ArrayList;
 import java.util.UUID;
+
+import com.purplecow.businesslogic.interfaces.IItemRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -9,13 +12,16 @@ public class ItemDataAccess
 {
     private ArrayList<Item> itemList = null;
 
+    @Autowired
+    private IItemRepository itemRepository = null;
+
     /*
     * Constructor.
     * */
     public ItemDataAccess()
     {
         this.itemList = new ArrayList<Item>();
-        this.createItems();
+
     }
 
     /*
@@ -23,6 +29,7 @@ public class ItemDataAccess
     */
     public ArrayList<Item> getItems()
     {
+        itemRepository.findAll().forEach(itemList::add);
         return this.itemList;
     }
 
@@ -39,13 +46,7 @@ public class ItemDataAccess
     */
     public void addItems(ArrayList<Item> itemsToAdd)
     {
-        for(Item itemToAdd : itemsToAdd)
-        {
-            if(itemToAdd != null)
-            {
-                this.itemList.add(itemToAdd);
-            }
-        }
+        itemRepository.saveAll(itemsToAdd);
     }
 
     /*
@@ -53,10 +54,7 @@ public class ItemDataAccess
     */
     public void addItem(Item itemToAdd)
     {
-        if(itemToAdd != null)
-        {
-            this.itemList.add(itemToAdd);
-        }
+        itemRepository.save(itemToAdd);
     }
 
 
@@ -65,16 +63,7 @@ public class ItemDataAccess
     */
     public Item getItem(UUID itemId)
     {
-        Item itemToReturn = null;
-        for(Item thisItem : itemList)
-        {
-            if(thisItem.getId().equals(itemId))
-            {
-                itemToReturn = thisItem;
-            }
-            //returns a null item if not found.
-        }
-        return itemToReturn;
+        return itemRepository.findById(itemId).get();
     }
 
     /*
@@ -82,13 +71,7 @@ public class ItemDataAccess
      */
     public void updateItem(Item updatedItem)
     {
-        for(Item itemToUpdate : this.itemList)
-        {
-            if(itemToUpdate.getId().equals(updatedItem.getId()))
-            {
-                this.itemList.set(this.itemList.indexOf(itemToUpdate), updatedItem);
-            }
-        }
+        itemRepository.save(updatedItem);
     }
 
     /*
@@ -96,16 +79,7 @@ public class ItemDataAccess
      */
     public void updateItems(ArrayList<Item> updatedItems)
     {
-        for(Item itemToUpdate : this.itemList)
-        {
-            for(Item updatedItem: updatedItems)
-            {
-                if (itemToUpdate.getId().equals(updatedItem.getId()))
-                {
-                    this.itemList.set(this.itemList.indexOf(itemToUpdate), updatedItem);
-                }
-            }
-        }
+        itemRepository.saveAll(updatedItems);
     }
 
     /*
@@ -113,13 +87,7 @@ public class ItemDataAccess
     */
     public void deleteItem(UUID itemId)
     {
-        for(Item thisItem : itemList)
-        {
-            if(thisItem.getId().equals(itemId))
-            {
-                itemList.remove(thisItem);
-            }
-        }
+        itemRepository.deleteById(itemId);
     }
 
     /*
@@ -127,16 +95,7 @@ public class ItemDataAccess
     */
     public void deleteItems(ArrayList<Item> itemsToDelete)
     {
-        for(Item thisItem : itemList)
-        {
-            for(Item itemToDelete: itemsToDelete)
-            {
-                if (thisItem.getId().equals(itemToDelete.getId()))
-                {
-                    itemList.remove(itemToDelete);
-                }
-            }
-        }
+        itemRepository.deleteAll(itemsToDelete);
     }
 
     /*
@@ -145,24 +104,9 @@ public class ItemDataAccess
     public void deleteItems()
     {
         this.itemList.clear();
+        itemRepository.deleteAll();
     }
 
-    private void createItems()
-    {
-        Item itemA = new Item("Frederick");
-        Item itemB = new Item("Robert");
-        Item itemC = new Item("Matthew");
-        Item itemD = new Item("Shakirah");
-        Item itemE = new Item("Claudia");
-        Item itemF = new Item("Stephanie");
 
-        this.itemList.add(itemA);
-        this.itemList.add(itemB);
-        this.itemList.add(itemC);
-        this.itemList.add(itemD);
-        this.itemList.add(itemE);
-        this.itemList.add(itemF);
-
-    }
 
 }

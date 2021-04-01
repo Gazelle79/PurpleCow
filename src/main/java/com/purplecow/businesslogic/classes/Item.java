@@ -1,9 +1,14 @@
 package com.purplecow.businesslogic.classes;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 import java.util.*;
 
+@Entity
 public class Item
 {
+    @Id
     private UUID id = null;
     private String name = null;
 

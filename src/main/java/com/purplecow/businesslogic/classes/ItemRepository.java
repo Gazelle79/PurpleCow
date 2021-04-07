@@ -1,6 +1,7 @@
 package com.purplecow.businesslogic.classes;
 
 import java.util.ArrayList;
+//import java.util.Map;
 import java.util.UUID;
 
 import com.purplecow.businesslogic.interfaces.IItemRepository;
@@ -8,9 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ItemDataAccess
+public class ItemRepository
 {
     private ArrayList<Item> itemList = null;
+    //private Map<Item, Item> itemList = null;
 
     @Autowired
     private IItemRepository itemRepository = null;
@@ -18,7 +20,7 @@ public class ItemDataAccess
     /*
     * Constructor.
     * */
-    public ItemDataAccess()
+    public ItemRepository()
     {
         this.itemList = new ArrayList<Item>();
 

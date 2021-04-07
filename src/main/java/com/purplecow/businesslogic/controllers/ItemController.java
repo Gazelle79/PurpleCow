@@ -1,7 +1,7 @@
 package com.purplecow.businesslogic.controllers;
 
 import com.purplecow.businesslogic.classes.Item;
-import com.purplecow.businesslogic.classes.ItemDataAccess;
+import com.purplecow.businesslogic.classes.ItemRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +17,7 @@ import java.util.*;
 public class ItemController
 {
     @Autowired
-    private ItemDataAccess dataAccess = new ItemDataAccess();
+    private ItemRepository itemRepository = new ItemRepository();
 
     /*
     Get all the items in the list.
@@ -25,7 +25,7 @@ public class ItemController
     @RequestMapping(method=RequestMethod.GET, value = "/item", produces = "application/json")
     public ArrayList<Item> getItems()
     {
-        return this.dataAccess.getItems();
+        return this.itemRepository.getItems();
     }
 
     /*
@@ -34,7 +34,7 @@ public class ItemController
     @RequestMapping(method=RequestMethod.GET, value= "/item/{id}", produces = "application/json")
     public Item getItem(@PathVariable UUID id)
     {
-        return this.dataAccess.getItem(id);
+        return this.itemRepository.getItem(id);
     }
 
     /*
@@ -43,7 +43,7 @@ public class ItemController
     @RequestMapping(method=RequestMethod.PUT, value = "/item", produces = "application/json")
     public void setItems(ArrayList<Item> itemsToSet)
     {
-        this.dataAccess.setItems(itemsToSet);
+        this.itemRepository.setItems(itemsToSet);
     }
 
     /*
@@ -52,7 +52,7 @@ public class ItemController
     @RequestMapping(method=RequestMethod.PUT, value = "/item/{id}", produces = "application/json")
     public void updateItem(@PathVariable UUID id, @RequestBody Item updatedItem)
     {
-        this.dataAccess.updateItem(updatedItem);
+        this.itemRepository.updateItem(updatedItem);
     }
 
 
@@ -62,7 +62,7 @@ public class ItemController
     @RequestMapping(method=RequestMethod.DELETE, value = "/item/{id}")
     public void deleteItem(@PathVariable UUID id)
     {
-        this.dataAccess.deleteItem(id);
+        this.itemRepository.deleteItem(id);
     }
 
 
@@ -72,7 +72,7 @@ public class ItemController
     @RequestMapping(method=RequestMethod.DELETE, value = "/item", produces = "application/json")
     public void deleteItems()
     {
-        this.dataAccess.deleteItems();
+        this.itemRepository.deleteItems();
     }
 
 
@@ -82,7 +82,7 @@ public class ItemController
     @RequestMapping(method=RequestMethod.POST, value = "/item", produces = "application/json")
     public void addItem(@RequestBody Item itemToAdd)
     {
-        this.dataAccess.addItem(itemToAdd);
+        this.itemRepository.addItem(itemToAdd);
     }
 
 

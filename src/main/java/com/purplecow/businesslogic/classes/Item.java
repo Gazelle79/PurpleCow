@@ -1,7 +1,7 @@
 package com.purplecow.businesslogic.classes;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.Id;  //Tell JPA this is the Primary Key
 
 import java.util.*;
 
@@ -10,7 +10,7 @@ public class Item
 {
     @Id
     private UUID id = null;
-    private String name = null;
+    private String name = "No_Name";
 
     //Getters
     public UUID getId()
@@ -34,6 +34,11 @@ public class Item
     {
         this.id = UUID.randomUUID();
         this.name = itemName;
+    }
+
+    public Item()
+    {
+        new Item(name);
     }
 
     @Override

@@ -1,7 +1,9 @@
-package com.purplecow.businesslogic.classes;
+package com.purplecow.businesslogic.model;
 
 import java.util.ArrayList;
-//import java.util.Map;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import com.purplecow.businesslogic.interfaces.IItemRepository;
@@ -12,7 +14,6 @@ import org.springframework.stereotype.Service;
 public class ItemRepository
 {
     private ArrayList<Item> itemList = null;
-    //private Map<Item, Item> itemList = null;
 
     @Autowired
     private IItemRepository itemRepository = null;
@@ -23,7 +24,7 @@ public class ItemRepository
     public ItemRepository()
     {
         this.itemList = new ArrayList<Item>();
-
+        this.makeItems();
     }
 
     /*
@@ -109,6 +110,23 @@ public class ItemRepository
         itemRepository.deleteAll();
     }
 
+    /*
+    Something went wrong.
+    */
+    public void error()
+    {
+        System.out.println("It's wrong!");
+    }
+
+
+    private void makeItems()
+    {
+        for(int i=0; i<3; i++)
+        {
+            Item thisItem = new Item();
+            this.itemList.add(thisItem);
+        }
+    }
 
 
 }

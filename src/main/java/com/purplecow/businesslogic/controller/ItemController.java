@@ -1,7 +1,7 @@
-package com.purplecow.businesslogic.controllers;
+package com.purplecow.businesslogic.controller;
 
-import com.purplecow.businesslogic.classes.Item;
-import com.purplecow.businesslogic.classes.ItemRepository;
+import com.purplecow.businesslogic.model.Item;
+import com.purplecow.businesslogic.model.ItemRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -79,12 +79,21 @@ public class ItemController
     /*
     Add an Item.
     */
-    @RequestMapping(method=RequestMethod.POST, value = "/item", produces = "application/json")
+    @RequestMapping(method=RequestMethod.POST, value = "/item/{id}", produces = "application/json")
     public void addItem(@RequestBody Item itemToAdd)
     {
         this.itemRepository.addItem(itemToAdd);
     }
 
+
+    /*
+    Error.
+    */
+    @RequestMapping(method=RequestMethod.TRACE, value = "/error", produces = "application/json")
+    public void error(@RequestBody Item itemToAdd)
+    {
+        this.itemRepository.addItem(itemToAdd);
+    }
 
 
 }

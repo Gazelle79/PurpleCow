@@ -2,7 +2,6 @@ package com.purplecow.businesslogic.controller;
 
 import com.purplecow.businesslogic.model.Item;
 import com.purplecow.businesslogic.model.ItemRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,8 +30,8 @@ public class ItemController
     /*
     Return an item with this ID.
     */
-    @RequestMapping(method=RequestMethod.GET, value= "/item/{id}", produces = "application/json")
-    public Item getItem(@PathVariable UUID id)
+    @RequestMapping(method=RequestMethod.GET, value = "/item/{id}", produces = "application/json")
+    public Item getItem(@PathVariable (name = "id") UUID id)
     {
         return this.itemRepository.getItem(id);
     }
@@ -50,7 +49,7 @@ public class ItemController
     Update an item with this id.
      */
     @RequestMapping(method=RequestMethod.PUT, value = "/item/{id}", produces = "application/json")
-    public void updateItem(@PathVariable UUID id, @RequestBody Item updatedItem)
+    public void updateItem(@PathVariable (name = "id") UUID id, @RequestBody Item updatedItem)
     {
         this.itemRepository.updateItem(updatedItem);
     }
@@ -60,7 +59,7 @@ public class ItemController
     Delete an item with this id.
     */
     @RequestMapping(method=RequestMethod.DELETE, value = "/item/{id}")
-    public void deleteItem(@PathVariable UUID id)
+    public void deleteItem(@PathVariable (name = "id") UUID id)
     {
         this.itemRepository.deleteItem(id);
     }
@@ -70,9 +69,9 @@ public class ItemController
     Clear the internal set of items.
     */
     @RequestMapping(method=RequestMethod.DELETE, value = "/item", produces = "application/json")
-    public void deleteItems()
+    public void clearItems()
     {
-        this.itemRepository.deleteItems();
+        this.itemRepository.clearItems();
     }
 
 

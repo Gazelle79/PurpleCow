@@ -32,12 +32,14 @@ public class Item
 
     public Item(String itemName)
     {
+        super();
         this.id = UUID.randomUUID();
         this.name = itemName;
     }
 
     public Item()
     {
+        super();
         this.id = UUID.randomUUID();
     }
 

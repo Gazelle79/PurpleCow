@@ -27,6 +27,7 @@ public class GlobalExceptionHandler
 
     //Global exceptions
 
+    /*
     @ExceptionHandler(value = Exception.class)
     public ResponseEntity<?> handleGlobalException(Exception exception, WebRequest request)
     {
@@ -34,7 +35,7 @@ public class GlobalExceptionHandler
         ResponseEntity<?> responseToReturn = new ResponseEntity<>(details, HttpStatus.INTERNAL_SERVER_ERROR);
         return responseToReturn;
     }
-
+    */
 
 
 }

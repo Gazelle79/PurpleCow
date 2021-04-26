@@ -1,9 +1,7 @@
 package com.purplecow.businesslogic.model;
 
 import java.util.ArrayList;
-
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 import com.purplecow.businesslogic.interfaces.IItemRepository;
@@ -37,7 +35,7 @@ public class ItemRepository
     }
 
     /*
-    Set "ItemsToSet" to an internal list of items.
+    Set the internal list of items to "itemsToSet".
     */
     public void setItems(ArrayList<Item> itemsToSet)
     {
@@ -64,9 +62,9 @@ public class ItemRepository
     /*
     Return an item with this ID.
     */
-    public Item getItem(UUID itemId)
+    public Item getItem(UUID id)
     {
-        return itemRepository.findById(itemId).get();
+        return itemRepository.findById(id).get();
     }
 
     /*
@@ -88,9 +86,9 @@ public class ItemRepository
     /*
     Delete an item with this id.
     */
-    public void deleteItem(UUID itemId)
+    public void deleteItem(UUID id)
     {
-        itemRepository.deleteById(itemId);
+        itemRepository.deleteById(id);
     }
 
     /*
@@ -102,9 +100,9 @@ public class ItemRepository
     }
 
     /*
-    Clear the internal set of items.
+    Clear all items in the repository.
     */
-    public void deleteItems()
+    public void clearItems()
     {
         this.itemList.clear();
         itemRepository.deleteAll();
@@ -124,6 +122,7 @@ public class ItemRepository
         for(int i=0; i<3; i++)
         {
             Item thisItem = new Item();
+            thisItem.setName("Item_" + i);
             this.itemList.add(thisItem);
         }
     }

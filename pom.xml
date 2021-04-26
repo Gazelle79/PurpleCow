@@ -49,6 +49,19 @@
 			<scope>runtime</scope>
 		</dependency>
 
+
+		<!-- H2 In-Memory database -->
+		<!--
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.200</version>
+			<scope>test</scope>
+		</dependency>
+		-->
+
+
+		<!-- MySQL -->
 		<!-- <dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>

@@ -16,14 +16,16 @@ import java.util.*;
 @RestController
 public class ItemController
 {
-    @Autowired
-    private ItemRepository itemRepository = new ItemRepository();
+    private ItemRepository itemRepository;
 
+    public ItemController(ItemRepository itemRepository) {
+        this.itemRepository = itemRepository;
+    }
     /*
     Get all the items in the list.
     */
     @RequestMapping(method=RequestMethod.GET, value = "/item", produces = "application/json")
-    public ArrayList<Item> getItems()
+    public List<Item> getItems()
     {
         return this.itemRepository.getItems();
     }

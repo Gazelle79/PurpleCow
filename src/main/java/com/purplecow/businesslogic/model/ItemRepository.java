@@ -1,8 +1,8 @@
 package com.purplecow.businesslogic.model;
 
-import java.util.ArrayList;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.purplecow.businesslogic.interfaces.IItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,16 +11,22 @@ import org.springframework.stereotype.Service;
 @Service
 public class ItemRepository
 {
-    private ArrayList<Item> itemList = null;
+    // no need to initialize the class members here.
+    //  Spring's dependency injection will handle this
+    //  at runtime.
 
-    @Autowired
-    private IItemRepository itemRepository = null;
+    // Also, since you're using the DB, this list isn't really necessary
+    private ArrayList<Item> itemList;
+    private IItemRepository itemRepository;
 
     /*
     * Constructor.
     * */
-    public ItemRepository()
+    // NTOE: newer versions of SpringBoot will automatically
+    //  autowire your constructor
+    public ItemRepository(IItemRepository itemRepository)
     {
+        this.itemRepository = itemRepository;
         this.itemList = new ArrayList<Item>();
         this.makeItems();
     }
@@ -28,10 +34,16 @@ public class ItemRepository
     /*
     Get all the items in the list.
     */
-    public ArrayList<Item> getItems()
+    public List<Item> getItems()
     {
+        // by doing this, every time this method is executed, you're
+        //  adding all 3 of the items to the list again, so it continues
+        //  to grow with each call.
+        //itemRepository.findAll().forEach(itemList::add);
+        //return this.itemList;
+        List<Item> itemList = new ArrayList<>();
         itemRepository.findAll().forEach(itemList::add);
-        return this.itemList;
+        return itemList;
     }
 
     /*
@@ -64,6 +76,20 @@ public class ItemRepository
     */
     public Item getItem(UUID id)
     {
+        /*
+            Optional.get() throws an exception if no value is present,
+              so the recommended way is to use one of the other methods
+              that allow you to return specific values, handle exceptions, etc.
+              Examples:
+              itemRepository.findById(id).orElse(null);
+              itemRepository.findById(id).orElseGet(nothing -> { return someItem;});
+
+              Another way to handle this would most likely be to create a generic response Object
+              that you always return from every call. That object can contain a List<Item> and a String
+              with an error message. So if a call fails, you populate the error string and return the response
+              object. If it doesn't, you return the Item(s) in the list and return the response object. Either way,
+              the return type is always the same for the client.
+         */
         return itemRepository.findById(id).get();
     }
 
@@ -125,6 +151,9 @@ public class ItemRepository
             thisItem.setName("Item_" + i);
             this.itemList.add(thisItem);
         }
+        // You were getting errors because you weren't adding
+        //  the items to the DB. This fixed the errors.
+        itemRepository.saveAll(itemList);
     }
 
 

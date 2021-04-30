@@ -24,7 +24,7 @@ EOF
 # build project and docker image, then run it
 cd ${BASE_DIR}
 docker stop purplecow >/dev/null 2>&1
-mvn clean package && \
+${BASE_DIR}/mvnw clean package && \
    sudo docker build -t purplecow . && \
    sudo docker run -d --rm --name purplecow -p ${PORT}:${PORT} purplecow
 

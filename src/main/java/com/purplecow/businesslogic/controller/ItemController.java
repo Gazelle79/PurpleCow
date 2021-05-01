@@ -2,9 +2,7 @@ package com.purplecow.businesslogic.controller;
 
 import com.purplecow.businesslogic.model.Item;
 import com.purplecow.businesslogic.model.ItemRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.web.bind.annotation.*;  //Can no longer use web.bind.annotation?
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 

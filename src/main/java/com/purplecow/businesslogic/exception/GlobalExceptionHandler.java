@@ -2,7 +2,6 @@ package com.purplecow.businesslogic.exception;
 
 import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 
-//Can no longer use org.springframework.http??
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -29,7 +28,6 @@ public class GlobalExceptionHandler
 
     //Global exceptions
 
-    /*
     @ExceptionHandler(value = Exception.class)
     public ResponseEntity<?> handleGlobalException(Exception exception, WebRequest request)
     {
@@ -37,7 +35,6 @@ public class GlobalExceptionHandler
         ResponseEntity<?> responseToReturn = new ResponseEntity<>(details, HttpStatus.INTERNAL_SERVER_ERROR);
         return responseToReturn;
     }
-    */
 
 
 }

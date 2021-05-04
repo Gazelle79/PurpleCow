@@ -1,12 +1,11 @@
 package com.purplecow.businesslogic.model;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import com.purplecow.businesslogic.interfaces.IItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org. springframework.cache.annotation.Cacheable;
 
 @Service
 public class ItemRepository
@@ -22,25 +21,19 @@ public class ItemRepository
     /*
     * Constructor.
     * */
-    // NTOE: newer versions of SpringBoot will automatically
-    //  autowire your constructor
     public ItemRepository(IItemRepository itemRepository)
     {
         this.itemRepository = itemRepository;
-        this.itemList = new ArrayList<Item>();
+        this.itemList = new ArrayList<>();
         this.makeItems();
     }
 
     /*
     Get all the items in the list.
     */
+    @Cacheable("all-items-cache")
     public List<Item> getItems()
     {
-        // by doing this, every time this method is executed, you're
-        //  adding all 3 of the items to the list again, so it continues
-        //  to grow with each call.
-        //itemRepository.findAll().forEach(itemList::add);
-        //return this.itemList;
         List<Item> itemList = new ArrayList<>();
         itemRepository.findAll().forEach(itemList::add);
         return itemList;
@@ -74,6 +67,7 @@ public class ItemRepository
     /*
     Return an item with this ID.
     */
+    @Cacheable(value="item-cache", key="'item-cache-' + #item.id")
     public Item getItem(UUID id)
     {
         /*
@@ -90,7 +84,7 @@ public class ItemRepository
               object. If it doesn't, you return the Item(s) in the list and return the response object. Either way,
               the return type is always the same for the client.
          */
-        return itemRepository.findById(id).get();
+        return itemRepository.findById(id).orElse(null);
     }
 
     /*
@@ -145,7 +139,7 @@ public class ItemRepository
 
     private void makeItems()
     {
-        for(int i=0; i<3; i++)
+        for(int i=0; i<1000; i++)
         {
             Item thisItem = new Item();
             thisItem.setName("Item_" + i);

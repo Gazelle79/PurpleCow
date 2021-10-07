@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 /*
-* This class implements the functionality for REST using
+* Implements the functionality for REST using
 * HTTP GET, POST, PUT, etc.
 * */
 
@@ -54,7 +54,6 @@ public class ItemController
     {
         this.itemRepository.updateItem(updatedItem);
     }
-
 
     /*
     Delete an item with this id.
